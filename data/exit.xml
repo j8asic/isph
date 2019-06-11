@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<simulation>
+
+  <name value="exit2"/>
+  <dimensions value="2"/>
+  <precision value="single"/>
+  <async_output enable="n"/>
+
+  <solver type="isph">
+    <projection type="non-incremental" order="1"/>
+    <ppe_solver type="bicgstab" tolerance="1e-3" max_iterations="500"/>
+    <free_surface value="1.35" dirichlet="w"/>
+    <particle_shifting enable="n" factor="0.04" frequency="2"/>
+  </solver>
+
+  <devices type="gpu" name="" count="all" />
+
+  <boundary>
+    <min>-0.5 -0.3</min>
+    <max>0.5 0.8</max>
+  </boundary>
+
+  <gravity value="0; -9.81"/>
+
+  <particle_spacing value="0.01"/>
+  <smoothing_kernel type="quintic" value="0.012" correction="n"/>
+
+  <fluid name="water fluid" density="1000" viscosity="0.1"/>
+ 
+  <setup>
+
+    <circle name="cylinder" type="boundary">
+      <center value="0; 0.15"/>
+      <radius value="0.0625"/>
+      <movement start="0" end="0">
+        <velocity value="0; min(30*t,0.7644)"/>
+      </movement>
+    </circle>
+    
+    <line name="fluid top" type="free surface">
+      <start value="-0.3; 0.4"/>
+      <end value="0.3; 0.4"/>
+    </line>
+
+    <line name="bottom wall" type="boundary">
+      <start value="-0.3; 0.0"/>
+      <end value="0.3; 0.0"/>
+    </line>
+    <line name="left wall" type="boundary">
+      <start value="-0.3; 0.5"/>
+      <end value="-0.3; 0.0"/>
+    </line>
+    <line name="right wall" type="boundary">
+      <start value="0.3; 0.0"/>
+      <end value="0.3; 0.5"/>
+    </line>
+
+    <bucket_fill name="water fluid">
+      <location value="0; 0.05"/>
+    </bucket_fill>
+  </setup>
+
+  <run_time value="0.6"/>
+  <time_step value="0.1e-3" auto_factor="0.5"/>
+
+  <export format="vtk" time_step="0.01">
+    <variable value="PRESSURES"/>
+    <variable value="VELOCITIES"/>
+    <variable value="FREE_SURFACE"/>
+  </export>
+
+  <export format="force" time_step="2e-3">
+    <body value="cylinder"/>
+  </export>
+
+</simulation>

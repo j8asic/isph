@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<simulation>
+
+  <description>
+    Dry bed dam break with impact on vertical wall.
+  </description>
+
+  <name value="dam impact"/>
+  <dimensions value="2"/>
+  <precision value="single"/>
+  <async_output enable="y"/>
+
+  <solver type="isph">
+    <projection type="non-incremental" order="1"/>
+    <ppe_solver type="bicgstab" tolerance="1e-3" max_iterations="500"/>
+    <free_surface value="1.5" dirichlet="s"/>
+    <particle_shifting enable="n" factor="0.006" frequency="1"/>
+  </solver>
+
+  <devices type="gpu" name="" count="all" />
+
+  <boundary>
+    <min>-1.25 -0.05</min>
+    <max>2.07 1.42</max>
+  </boundary>
+
+  <gravity value="0; -10"/>
+
+  <particle_spacing value="0.01"/>
+  <smoothing_kernel type="quintic" value="0.012" correction="n"/>
+
+  <fluid name="water fluid" density="1000" viscosity="0.05"/>
+
+  <setup>
+    <line name="fluid top" type="free surface">
+      <start value="-1.2; 0.6"/>
+      <end value="0; 0.6"/>
+    </line>
+    <line name="fluid right" type="free surface">
+      <start value="0; 0.6"/>
+      <end value="0; 0"/>
+    </line>
+    
+    <line name="floor" type="boundary">
+      <start value="-1.2; 0"/>
+      <end value="2.02; 0"/>
+    </line>
+    <line name="floor 2" type="boundary">
+      <start value="-1.2; -0.015"/>
+      <end value="2.02; -0.015"/>
+    </line>
+    <line name="left wall" type="boundary">
+      <start value="-1.2; 1.0"/>
+      <end value="-1.2; 0"/>
+    </line>
+    <line name="right wall" type="boundary">
+      <start value="2.02; 0"/>
+      <end value="2.02; 1.4"/>
+    </line>
+    <line name="right wall 2" type="boundary">
+      <start value="2.035; 0"/>
+      <end value="2.035; 1.4"/>
+    </line>
+
+    <bucket_fill name="water fluid">
+      <location value="-1; 0.5"/>
+    </bucket_fill>
+  </setup>
+
+  <run_time value="2"/>
+  <time_step value="0.001" auto_factor="0.25"/>
+
+  <export format="vtk" time_step="0.02">
+    <variable value="PRESSURES"/>
+    <variable value="VELOCITIES"/>
+    <variable value="FREE_SURFACE"/>
+  </export>
+
+  <export format="probes" time_step="0.002">
+    <variable value="PRESSURES"/>
+    <location>2.02 0.16 0</location>
+  </export>
+
+</simulation>

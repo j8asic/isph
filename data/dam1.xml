@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<simulation>
+
+  <description>Example simulation with simple dam break.</description>
+
+  <name value="dam break"/>
+  <dimensions value="2"/>
+  <precision value="single"/>
+  <async_output enable="no"/>
+
+  <solver type="isph">
+    <projection type="non-incremental" order="1"/>
+    <ppe_solver type="bicgstab" tolerance="1e-3" max_iterations="200"/>
+    <free_surface value="1.5"/>
+    <particle_shifting enable="n" factor="0.03" frequency="2"/>
+  </solver>
+
+  <devices type="gpu" name="" count="all" />
+
+  <boundary>
+    <min>-0.5 -0.5</min>
+    <max>2 2</max>
+  </boundary>
+
+  <gravity>0 -9.81</gravity>
+
+  <particle_spacing value="0.02"/>
+  <smoothing_kernel type="quintic" value="0.025" correction="no"/>
+
+  <fluid name="water fluid" density="1000.0" viscosity="0.001"/>
+
+  <setup>
+    <line name="fluid top" type="free surface">
+      <start>0.0 1.01</start>
+      <end>2 1.01</end>
+    </line>
+    <line name="fluid right" type="free surface">
+      <start>1.0 0</start>
+      <end>1.0 2.0</end>
+    </line>
+    <line name="bottom wall" type="boundary">
+      <start>0 0</start>
+      <end>1.5 0</end>
+    </line>
+    <line name="left wall" type="boundary">
+      <start>0 1</start>
+      <end>0 0</end>
+    </line>
+    <line name="right wall" type="boundary">
+      <start>1.5 0</start>
+      <end>1.5 1</end>
+    </line>
+
+    <bucket_fill name="water fluid">
+      <location value="0.4999; 0.4999"/>
+    </bucket_fill>
+  </setup>
+
+  <run_time value="2.0"/>
+  <time_step value="0.0005" auto_factor="0.5"/>
+
+  <export format="vtk" time_step="0.03">
+    <variable value="PRESSURES"/>
+    <variable value="VELOCITIES"/>
+    <variable value="FREE_SURFACE"/>
+    <variable value="DIV_VEL"/>
+  </export>
+
+</simulation>

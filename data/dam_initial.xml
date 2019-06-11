@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<simulation>
+
+  <description>
+    Wed bed initial stages of inviscid dam break.
+    Note: Dimensions are in centimeters.
+  </description>
+
+  <name value="dam wet initial"/>
+  <dimensions value="2"/>
+  <precision value="single"/>
+  <async_output enable="no"/>
+
+  <solver type="isph">
+    <projection type="non-incremental" order="1"/>
+    <ppe_solver type="bicgstab" tolerance="1e-3" max_iterations="250"/>
+    <free_surface value="1.35"/>
+    <particle_shifting enable="y" factor="0.01" frequency="1"/>
+  </solver>
+
+  <devices type="gpu" name="" count="all" />
+
+  <boundary>
+    <min>-30 -5</min>
+    <max>15 15</max>
+  </boundary>
+
+  <gravity>0 -981</gravity>
+
+  <particle_spacing value="0.125"/>
+  <smoothing_kernel type="quintic" value="0.15" correction="n"/>
+
+  <fluid name="water fluid" density="1000.0" viscosity="1e-5"/>
+
+  <setup>
+    <line name="fluid top" type="free surface">
+      <start>-25 9</start>
+      <end>0 9</end>
+    </line>
+    <line name="prijelaz1" type="free surface">
+      <start>-0.5 9</start>
+      <end>0 8.3</end>
+    </line>
+    <line name="fluid right" type="free surface">
+      <start>0 8.3</start>
+      <end>0 0.4</end>
+    </line>
+    <line name="prijelaz2" type="free surface">
+      <start>0 0.4</start>
+      <end>0.4 0</end>
+    </line>
+    <line name="bed top" type="free surface">
+      <start>0.4 0</start>
+      <end>10 0</end>
+    </line>
+
+    <line name="bottom wall" type="boundary">
+      <start>-25 -1</start>
+      <end>10 -1</end>
+    </line>
+    <line name="left wall" type="boundary">
+      <start>-25 9</start>
+      <end>-25 -1</end>
+    </line>
+    <line name="right wall" type="boundary">
+      <start>10 -1</start>
+      <end>10 0</end>
+    </line>
+
+    <bucket_fill name="water fluid">
+      <location value="-5; 8.875"/>
+    </bucket_fill>
+  </setup>
+
+  <run_time value="0.08"/>
+  <time_step value="0.00025" auto_factor="0.5"/>
+
+  <export format="vtk" time_step="0.1">
+    <variable value="PRESSURES"/>
+    <variable value="VELOCITIES"/>
+    <variable value="FREE_SURFACE"/>
+
+    <time value="0.024"/>
+    <time value="0.04"/>
+    <time value="0.066"/>
+    <time value="0.08"/>
+  </export>
+
+</simulation>

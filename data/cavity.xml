@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<simulation>
+
+  <description>Lid-driven cavity flow, Re = 1000</description>
+
+  <name value="cavity"/>
+  <dimensions value="2"/>
+  <precision value="single"/>
+  <async_output enable="no"/>
+
+  <solver type="isph">
+    <projection type="non-incremental" order="1"/>
+    <ppe_solver type="bicgstab" tolerance="5" max_iterations="1000"/>
+    <free_surface_factor value="0"/> <!-- we know that there is no free surface -->
+    <particle_shifting enable="y" factor="1" frequency="1"/>
+  </solver>
+
+  <devices type="gpu" name="" count="all" />
+
+  <boundary>
+    <min>-0.2 -0.2</min>
+    <max>1.2 1.2</max>
+  </boundary>
+
+  <particle_spacing value="0.01"/>
+  <smoothing_kernel type="quintic" value="0.02" correction="n"/>
+
+  <fluid name="water fluid" density="1.0" viscosity="0.001"/>
+
+  <setup>
+    <line name="bottom" type="boundary">
+      <start>0 0</start>
+      <end>1 0</end>
+    </line>
+    <line name="top" type="boundary">
+      <start>1.0 1</start>
+      <end>-0.0 1</end>
+      <initialization>
+        <variable name="VELOCITIES" value="1; 0;"/>
+      </initialization>
+    </line>
+    <line name="left" type="boundary">
+      <start>0 1</start>
+      <end>0 0</end>
+    </line>
+    <line name="right" type="boundary">
+      <start>1 0</start>
+      <end>1 1</end>
+    </line>
+
+    <bucket_fill name="water fluid">
+      <location value="0.5; 0.99"/>
+    </bucket_fill>
+  </setup>
+
+  <run_time value="40.0"/>
+  <time_step value="1e-4" auto_factor="0.1"/>
+
+  <export format="vtk" time_step="0.25">
+    <variabla value="PRESSURES"/>
+    <variable value="VELOCITIES"/>
+  </export>
+
+  <export format="probes" time_step="1e-1">
+    <variable value="VELOCITIES"/>
+
+    <!-- VERTICAL LINE -->
+    <location>0.5 0.9766 0</location>
+    <location>0.5 0.9531 0</location>
+    <location>0.5 0.8516 0</location>
+    <location>0.5 0.7344 0</location>
+    <location>0.5 0.6172 0</location>
+    <location>0.5 0.5000 0</location>
+    <location>0.5 0.4531 0</location>
+    <location>0.5 0.2813 0</location>
+    <location>0.5 0.1719 0</location>
+    <location>0.5 0.1016 0</location>
+    <location>0.5 0.0547 0</location>
+
+  </export>
+
+</simulation>

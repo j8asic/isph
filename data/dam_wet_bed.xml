@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<simulation>
+
+  <description>
+    Wet bed dam break.
+  </description>
+
+  <name value="dam wet"/>
+  <dimensions value="2"/>
+  <precision value="single"/>
+  <async_output enable="no"/>
+
+  <solver type="isph">
+    <projection type="non-incremental" order="1"/>
+    <ppe_solver type="bicgstab" tolerance="2e-3" max_iterations="200"/>
+    <free_surface value="1.4" dirichlet="w"/>
+    <particle_shifting enable="no" factor="0.01" frequency="1"/>
+  </solver>
+
+  <devices type="gpu" name="" count="all" />
+
+  <boundary>
+    <min>-0.5 -0.1</min>
+    <max>0.7 0.5</max>
+  </boundary>
+
+  <gravity value="0; -10"/>
+
+  <particle_spacing value="0.01"/>
+  <smoothing_kernel type="quintic" value="0.012" correction="n"/>
+
+  <fluid name="water fluid" density="1000" viscosity="0.01"/>
+
+  <setup>
+    <line name="fluid top" type="free surface">
+      <start value="-0.38; 0.15"/>
+      <end value="0; 0.15"/>
+    </line>
+    <line name="bed top" type="free surface">
+      <start value="0; 0.018"/>
+      <end value="0.66; 0.018"/>
+    </line>
+    <line name="fluid right" type="free surface">
+      <start value="-0.00; 0.018"/>
+      <end value="-0.00; 0.15"/>
+    </line>
+
+    <line name="gate" type="boundary">
+      <start value="0; 0.025"/>
+      <end value="0; 0.2"/>
+      <movement start="0" end="0.1">
+        <velocity>0; min(2.0-t*20, 1.5)</velocity>
+      </movement>
+    </line>
+
+    <line name="bottom wall" type="boundary">
+      <start value="-0.38; 0"/>
+      <end value="0.66; 0"/>
+    </line>
+    <line name="left wall" type="boundary">
+      <start value="-0.38; 0.15"/>
+      <end value="-0.38; 0"/>
+    </line>
+    <line name="right wall" type="boundary">
+      <start value="0.66; 0"/>
+      <end value="0.66; 0.04"/>
+    </line>
+
+    <bucket_fill name="water fluid">
+      <location value="0.01; 0.01"/>
+    </bucket_fill>
+  </setup>
+
+  <run_time value="0.55"/>
+  <time_step value="cfl" auto_factor="1"/>
+
+  <export format="vtk" time_step="0.005">
+    <variable value="PRESSURES"/>
+    <variable value="VELOCITIES"/>
+    <variable value="FREE_SURFACE"/>
+  </export>
+
+</simulation>

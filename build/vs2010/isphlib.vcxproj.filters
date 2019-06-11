@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="extern">
+      <UniqueIdentifier>{5fa35c8b-64b0-4c36-a6de-e0dd6c29b8cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="extern\tinythread">
+      <UniqueIdentifier>{85a2f919-5828-4c6f-baa6-090111de29f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="extern\pugixml">
+      <UniqueIdentifier>{7914058c-f562-451b-a834-fcbd4701453a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="extern\clpp">
+      <UniqueIdentifier>{3b0aa1db-31cf-4a14-abd4-deae4bcfb8dd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\isphlib\extern\pugixml\pugiconfig.hpp">
+      <Filter>extern\pugixml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\isphlib\extern\pugixml\pugixml.hpp">
+      <Filter>extern\pugixml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\isphlib\cldevice.h" />
+    <ClInclude Include="..\..\isphlib\clglobalbuffer.h" />
+    <ClInclude Include="..\..\isphlib\clkernelargument.h" />
+    <ClInclude Include="..\..\isphlib\cllink.h" />
+    <ClInclude Include="..\..\isphlib\cllocalbuffer.h" />
+    <ClInclude Include="..\..\isphlib\clplatform.h" />
+    <ClInclude Include="..\..\isphlib\clprogram.h" />
+    <ClInclude Include="..\..\isphlib\clprogramconstant.h" />
+    <ClInclude Include="..\..\isphlib\clsubprogram.h" />
+    <ClInclude Include="..\..\isphlib\clsystem.h" />
+    <ClInclude Include="..\..\isphlib\clvariable.h" />
+    <ClInclude Include="..\..\isphlib\geometry.h" />
+    <ClInclude Include="..\..\isphlib\isph.h" />
+    <ClInclude Include="..\..\isphlib\loader.h" />
+    <ClInclude Include="..\..\isphlib\log.h" />
+    <ClInclude Include="..\..\isphlib\particle.h" />
+    <ClInclude Include="..\..\isphlib\probemanager.h" />
+    <ClInclude Include="..\..\isphlib\simulation.h" />
+    <ClInclude Include="..\..\isphlib\stdwriter.h" />
+    <ClInclude Include="..\..\isphlib\utils.h" />
+    <ClInclude Include="..\..\isphlib\vec.h" />
+    <ClInclude Include="..\..\isphlib\version.h" />
+    <ClInclude Include="..\..\isphlib\vtkwriter.h" />
+    <ClInclude Include="..\..\isphlib\wcsphsimulation.h" />
+    <ClInclude Include="..\..\isphlib\writer.h" />
+    <ClInclude Include="..\..\isphlib\xmlloader.h" />
+    <ClInclude Include="..\..\isphlib\extern\tinythread\tinythread.h">
+      <Filter>extern\tinythread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\isphlib\isphsimulation.h" />
+    <ClInclude Include="..\..\isphlib\extern\clpp\clpp.h">
+      <Filter>extern\clpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\isphlib\extern\clpp\clppContext.h">
+      <Filter>extern\clpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\isphlib\extern\clpp\clppCount.h">
+      <Filter>extern\clpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\isphlib\extern\clpp\clppProgram.h">
+      <Filter>extern\clpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\isphlib\extern\clpp\clppScan.h">
+      <Filter>extern\clpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\isphlib\extern\clpp\clppScan_Default.h">
+      <Filter>extern\clpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\isphlib\extern\clpp\clppScan_Default_CLKernel.h">
+      <Filter>extern\clpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\isphlib\extern\clpp\clppScan_GPU.h">
+      <Filter>extern\clpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\isphlib\extern\clpp\clppScan_GPU_CLKernel.h">
+      <Filter>extern\clpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\isphlib\extern\clpp\clppSort.h">
+      <Filter>extern\clpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\isphlib\extern\clpp\clppSort_BitonicSort.h">
+      <Filter>extern\clpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\isphlib\extern\clpp\clppSort_BitonicSort_CLKernel.h">
+      <Filter>extern\clpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\isphlib\extern\clpp\clppSort_RadixSort.h">
+      <Filter>extern\clpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\isphlib\extern\clpp\clppSort_RadixSort_CLKernel.h">
+      <Filter>extern\clpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\isphlib\extern\clpp\clppSort_RadixSortGPU.h">
+      <Filter>extern\clpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\isphlib\extern\clpp\clppSort_RadixSortGPU_CLKernel.h">
+      <Filter>extern\clpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\isphlib\extern\clpp\clppSort_BitonicSortGPU.h">
+      <Filter>extern\clpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\isphlib\extern\clpp\clppSort_BitonicSortGPU_CLKernel.h">
+      <Filter>extern\clpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\isphlib\csvwriter.h" />
+    <ClInclude Include="..\..\isphlib\timer.h" />
+    <ClInclude Include="..\..\isphlib\bodyforcewriter.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\isphlib\extern\pugixml\pugixml.cpp">
+      <Filter>extern\pugixml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\isphlib\cldevice.cpp" />
+    <ClCompile Include="..\..\isphlib\clglobalbuffer.cpp" />
+    <ClCompile Include="..\..\isphlib\clkernelargument.cpp" />
+    <ClCompile Include="..\..\isphlib\cllink.cpp" />
+    <ClCompile Include="..\..\isphlib\cllocalbuffer.cpp" />
+    <ClCompile Include="..\..\isphlib\clplatform.cpp" />
+    <ClCompile Include="..\..\isphlib\clprogram.cpp" />
+    <ClCompile Include="..\..\isphlib\clprogramconstant.cpp" />
+    <ClCompile Include="..\..\isphlib\clsubprogram.cpp" />
+    <ClCompile Include="..\..\isphlib\clsystem.cpp" />
+    <ClCompile Include="..\..\isphlib\clvariable.cpp" />
+    <ClCompile Include="..\..\isphlib\geometry.cpp" />
+    <ClCompile Include="..\..\isphlib\log.cpp" />
+    <ClCompile Include="..\..\isphlib\particle.cpp" />
+    <ClCompile Include="..\..\isphlib\probemanager.cpp" />
+    <ClCompile Include="..\..\isphlib\simulation.cpp" />
+    <ClCompile Include="..\..\isphlib\stdwriter.cpp" />
+    <ClCompile Include="..\..\isphlib\utils.cpp" />
+    <ClCompile Include="..\..\isphlib\vec.cpp" />
+    <ClCompile Include="..\..\isphlib\vtkwriter.cpp" />
+    <ClCompile Include="..\..\isphlib\wcsphsimulation.cpp" />
+    <ClCompile Include="..\..\isphlib\writer.cpp" />
+    <ClCompile Include="..\..\isphlib\xmlloader.cpp" />
+    <ClCompile Include="..\..\isphlib\extern\tinythread\tinythread.cpp">
+      <Filter>extern\tinythread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\isphlib\isphsimulation.cpp" />
+    <ClCompile Include="..\..\isphlib\extern\clpp\clpp.cpp">
+      <Filter>extern\clpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\isphlib\extern\clpp\clppContext.cpp">
+      <Filter>extern\clpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\isphlib\extern\clpp\clppCount.cpp">
+      <Filter>extern\clpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\isphlib\extern\clpp\clppProgram.cpp">
+      <Filter>extern\clpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\isphlib\extern\clpp\clppScan_Default.cpp">
+      <Filter>extern\clpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\isphlib\extern\clpp\clppScan_GPU.cpp">
+      <Filter>extern\clpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\isphlib\extern\clpp\clppSort.cpp">
+      <Filter>extern\clpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\isphlib\extern\clpp\clppSort_BitonicSort.cpp">
+      <Filter>extern\clpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\isphlib\extern\clpp\clppSort_RadixSort.cpp">
+      <Filter>extern\clpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\isphlib\extern\clpp\clppSort_RadixSortGPU.cpp">
+      <Filter>extern\clpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\isphlib\extern\clpp\clppSort_BitonicSortGPU.cpp">
+      <Filter>extern\clpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\isphlib\csvwriter.cpp" />
+    <ClCompile Include="..\..\isphlib\timer.cpp" />
+    <ClCompile Include="..\..\isphlib\bodyforcewriter.cpp" />
+  </ItemGroup>
+</Project>

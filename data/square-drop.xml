@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<simulation>
+
+  <name value="Patch" />
+
+  <description>
+    Evolution of a square patch of fluid test case. Ref:
+    A. Colagrossi, A Meshless Lagrangian method for free-surface and interface flows woth fragmentation, Ph.D thesis, 2005
+    J. Fang et Al., Improved SPH methods for simulating free surface flows of viscous fluids, Applied Numerical Mathematics, 2009
+  </description>
+
+  <dimensions value="2"/>
+  <precision value="single"/>
+  <async_output enable="no"/>
+
+  <solver type="isph">
+    <projection type="non-incremental" order="1"/>
+    <ppe_solver type="bicgstab" tolerance="1e-5" max_iterations="200"/>
+    <free_surface_factor value="1.45"/>
+    <particle_shifting enable="yes" factor="0.02" frequency="1"/>
+  </solver>
+
+  <devices type="gpu" name="" count="all" />
+
+  <boundary>
+    <min>-2.3 -2.3</min>
+    <max>2.3 2.3</max>
+  </boundary>
+
+  <gravity>0 0</gravity>
+
+  <particle_spacing value="0.02"/>
+  <smoothing_kernel type="cubic" value="0.03" correction="y"/>
+  <fluid name="water fluid" density="1000" viscosity="1000"/>
+
+  <setup>
+    <rectangle name="patch" type="water fluid">
+      <min>-0.5 -0.5</min>
+      <max>0.5  0.5</max>
+      <filled>true</filled>
+      <initialization>
+        <variable name="VELOCITIES">100.0*y;-100.0*x;0.0</variable>
+        <variable name="PRESSURES">
+          -1000.0*32.0*10000.0
+          * ( ( (1/(1*1*M_PI*M_PI))/(pow(1*M_PI,2) + pow(1*M_PI,2)))*sin(1*M_PI*(x+0.5))*sin(1*M_PI*(y+0.5))
+          +   ( (1/(3*1*M_PI*M_PI))/(pow(3*M_PI,2) + pow(1*M_PI,2)))*sin(3*M_PI*(x+0.5))*sin(1*M_PI*(y+0.5))
+          +   ( (1/(1*3*M_PI*M_PI))/(pow(1*M_PI,2) + pow(3*M_PI,2)))*sin(1*M_PI*(x+0.5))*sin(3*M_PI*(y+0.5))
+          +   ( (1/(3*3*M_PI*M_PI))/(pow(3*M_PI,2) + pow(3*M_PI,2)))*sin(3*M_PI*(x+0.5))*sin(3*M_PI*(y+0.5)) )
+        </variable>
+      </initialization>
+    </rectangle>
+  </setup>
+
+  <run_time value="0.04"/>
+  <time_step value="0.0001"/>
+
+  <export format="vtk" time_step="0.001">
+    <time value="0.0204"/>
+    <time value="0.0205"/>
+    <time value="0.0206"/>
+    <variable value="PRESSURES"/>
+    <variable>FREE_SURFACE_UN</variable>
+  </export>
+<!--
+  <export format="probes">
+    <frequency>10</frequency>
+    <variable>PRESSURES</variable>
+    <location>0 0 0</location>
+  </export>
+-->
+</simulation>

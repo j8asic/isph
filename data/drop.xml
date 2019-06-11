@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<simulation>
+
+  <description>
+    Circular drop, test #2
+  </description>
+
+  <name value="drop"/>
+  <dimensions value="2"/>
+  <precision value="single"/>
+  <async_output enable="n"/>
+
+  <solver type="isph">
+    <projection type="non-incremental" order="1"/>
+    <ppe_solver type="bicgstab" tolerance="1e-4" max_iterations="500"/>
+    <free_surface value="1.4" dirichlet="w"/>
+    <particle_shifting enable="n" factor="0.02" frequency="1"/>
+  </solver>
+
+  <devices type="gpu" name="" count="all" />
+
+  <boundary>
+    <min value="-1.0 -4.0"/>
+    <max value="1.0 4.0"/>
+  </boundary>
+
+  <gravity value="0; 0"/>
+
+  <particle_spacing value="0.01"/>
+  <smoothing_kernel type="quintic" value="0.022" correction="n"/>
+
+  <fluid name="water" density="1000" viscosity="0"/>
+
+  <setup>
+    <circle name="drop" type="free surface">
+      <center value="0; 0"/>
+      <radius value="1"/>
+      <initialization>
+        <variable name="VELOCITIES">-100*x; 100*y;</variable>
+        <variable name="PRESSURES">0.5*DENSITY*100*100*(1.0 - (x*x + y*y))</variable>
+      </initialization>
+    </circle>
+
+    <bucket_fill name="water">
+      <location value="0; 0.99"/>
+    </bucket_fill>
+  </setup>
+
+  <run_time value="0.02"/>
+  <time_step value="0.0001" auto_factor="1.0"/>
+
+  <export format="vtk" time_step="0.001">
+    <variable value="PRESSURES"/>
+    <variable value="VELOCITIES"/>
+    <variable value="FREE_SURFACE"/>
+  </export>
+
+  <export type="probes" time_step="0.0001">
+    <variable value="PRESSURES"/>
+    <variable value="VELOCITIES"/>
+    <location>0 0</location>
+    <location>0.5 0</location>
+    <location>0 0.5</location>
+  </export>
+
+</simulation>

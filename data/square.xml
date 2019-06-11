@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<simulation>
+
+  <description>
+    Square drop, test #2
+  </description>
+
+  <name value="square"/>
+  <dimensions value="2"/>
+  <precision value="single"/>
+  <async_output enable="n"/>
+
+  <solver type="isph">
+    <projection type="non-incremental" order="1"/>
+    <ppe_solver type="bicgstab" tolerance="1e-5" max_iterations="500"/>
+    <free_surface value="1.45" dirichlet="s"/>
+    <particle_shifting enable="y" factor="0.03" frequency="1"/>
+  </solver>
+
+  <devices type="gpu" name="" count="all" />
+
+  <boundary>
+    <min value="-0.51; -2.5"/>
+    <max value="2.5; 0.51"/>
+  </boundary>
+
+  <gravity value="0; 0"/>
+
+  <particle_spacing value="0.01333333333333333"/>
+  <smoothing_kernel type="quintic" value="0.016" correction="n"/>
+
+  <fluid name="water fluid" density="1000" viscosity="1"/>
+
+  <setup>
+    <line name="fluid top" type="free surface">
+      <start value="-0.5; 0.5"/>
+      <end value="0.5; 0.5"/>
+    </line>
+    <line name="fluid right" type="free surface">
+      <start value="0.5; 0.5"/>
+      <end value="0.5; -0.5"/>
+    </line>
+    <line name="fluid bottom" type="free surface">
+      <start value="0.5; -0.5"/>
+      <end value="-0.5; -0.5"/>
+    </line>
+    <line name="fluid left" type="free surface">
+      <start value="-0.5; -0.5"/>
+      <end value="-0.5; 0.5"/>
+
+      <initialization>
+        <variable name='VELOCITIES'>1.0*(exp(-pown(4*y,2))-exp(-4.0));-1.0*(exp(-pown(4*r.s0,2))-exp(-4.0));0.0</variable>
+      </initialization>
+    </line>
+
+    <bucket_fill name="water fluid">
+      <location value="0; 0"/>
+    </bucket_fill>
+  </setup>
+
+  <run_time value="1.501"/>
+  <time_step value="0.0005" auto_factor="1.0"/>
+
+  <export format="vtk" time_step="1e-1">
+    <variable value="PRESSURES"/>
+    <variable value="VELOCITIES"/>
+    <variable value="FREE_SURFACE"/>
+  </export>
+
+</simulation>

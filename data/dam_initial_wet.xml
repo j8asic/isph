@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<simulation>
+
+  <description>
+    Wed bed initial stages of inviscid dam break.
+  </description>
+
+  <name value="dam initial wet"/>
+  <dimensions value="2"/>
+  <precision value="single"/>
+  <async_output enable="no"/>
+
+  <solver type="isph">
+    <projection type="non-incremental" order="1"/>
+    <ppe_solver type="bicgstab" tolerance="1e-4" max_iterations="500"/>
+    <free_surface value="1.5" dirichlet="s"/>
+    <particle_shifting enable="n" factor="0.01" frequency="1"/>
+  </solver>
+
+  <devices type="gpu" name="" count="all" />
+
+  <boundary>
+    <min>-1.0 -0.05</min>
+    <max>0.35 0.15</max>
+  </boundary>
+
+  <gravity value="0; -10"/>
+
+  <particle_spacing value="0.002"/>
+  <smoothing_kernel type="quintic" value="0.0024" correction="n"/>
+
+  <fluid name="water fluid" density="1000" viscosity="0.02"/>
+
+  <setup>
+    <line name="fluid top" type="free surface">
+      <start value="-0.5; 0.1"/>
+      <end value="0; 0.1"/>
+    </line>
+    <!--<line name="prijelaz" type="free surface">
+      <start value="-0.01; 0.1"/>
+      <end value="0; 0.09"/>
+    </line>-->
+    <line name="fluid right" type="free surface">
+      <start value="0; 0.1"/>
+      <end value="0; 0.01"/>
+    </line>
+    <line name="bed top" type="free surface">
+      <start value="0; 0.01"/>
+      <end value="0.2; 0.01"/>
+    </line>
+    
+    <line name="bottom wall" type="boundary">
+      <start value="-0.5; 0"/>
+      <end value="0.2; 0"/>
+    </line>
+    <line name="left wall" type="boundary">
+      <start value="-0.5; 0.1"/>
+      <end value="-0.5; 0"/>
+    </line>
+    <line name="right wall" type="boundary">
+      <start value="0.2; 0"/>
+      <end value="0.2; 0.05"/>
+    </line>
+
+    <bucket_fill name="water fluid">
+      <location value="-0.1; 0.05"/>
+    </bucket_fill>
+  </setup>
+
+  <run_time value="0.14"/>
+  <time_step value="0.5e-3" auto_factor="0.5"/>
+
+  <export format="vtk" time_step="0.005">
+    <variable value="PRESSURES"/>
+    <variabla value="VELOCITIES"/>
+    <variabla value="FREE_SURFACE"/>
+  </export>
+
+</simulation>

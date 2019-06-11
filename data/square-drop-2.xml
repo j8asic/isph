@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<simulation>
+
+  <name value="square"/>
+  <dimensions value="2"/>
+  <precision value="single"/>
+  <async_output enable="no"/>
+
+  <solver type="isph">
+    <projection type="non-incremental" order="1"/>
+    <ppe_solver type="bicgstab" tolerance="1e-4" max_iterations="200"/>
+    <free_surface_factor value="1.5"/>
+    <particle_shifting enable="y" factor="0.01" frequency="1"/>
+  </solver>
+
+  <devices type="gpu" name="" count="all" />
+
+  <boundary>
+    <min>-0.51 -2.5</min>
+    <max>2.5 0.51</max>
+  </boundary>
+
+  <gravity>0 0</gravity>
+
+  <particle_spacing value="0.0125"/>
+  <smoothing_kernel type="gauss" value="0.02" correction="y"/>
+
+  <fluid name="water fluid" density="1000" viscosity="0.0"/>
+
+  <setup>
+    <rectangle name="patch" type="water fluid">
+      <min>-0.5 -0.5</min>
+      <max>0.5  0.5</max>
+      <filled>true</filled>
+      <initialization>
+        <variable name='VELOCITIES'>1.0*(exp(-pown(4*y,2))-exp(-4.0));-1.0*(exp(-pown(4*r.s0,2))-exp(-4.0));0.0</variable>
+      </initialization>
+    </rectangle>
+  </setup>
+
+  <run_time value="1.501"/>
+  <time_step value="1e-3"/>
+
+  <export type="vtk">
+    <time_step>0.1</time_step>
+    <variable>PRESSURES</variable>
+    <variable>VELOCITIES</variable>
+    <variable>FREE_SURFACE_UN</variable>
+  </export>
+<!--
+  <export type="csv" extension="txt">
+    <time_step>0.1</time_step>
+    <variable>PRESSURES</variable>
+    <variable>VELOCITIES</variable>
+  </export>
+-->
+</simulation>

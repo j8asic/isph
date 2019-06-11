@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<simulation>
+
+  <description>Simplest hydrostatic case - fluid in tank.</description>
+
+  <name value="hydrostatic"/>
+  <dimensions value="2"/>
+  <precision value="single"/>
+  <async_output enable="no"/>
+
+  <solver type="isph">
+    <projection type="non-incremental" order="1"/>
+    <ppe_solver type="bicgstab" tolerance="1e-6" max_iterations="200"/>
+    <free_surface value="1.4"/>
+    <particle_shifting enable="no" factor="0.05" frequency="1"/>
+  </solver>
+
+  <devices type="gpu" name="" count="all" />
+
+  <boundary>
+    <min>-1 -1</min>
+    <max>1 1</max>
+  </boundary>
+
+  <gravity>0 -10</gravity>
+
+  <particle_spacing value="0.02"/>
+  <smoothing_kernel type="cubic" value="0.028" correction="n"/>
+
+  <fluid name="water fluid" density="1000.0" viscosity="0.0"/>
+
+  <setup>
+    <line name="bottom" type="boundary">
+      <start>-0.5 -0.5</start>
+      <end>0.5 -0.5</end>
+    </line>
+    <line name="top" type="free surface">
+      <start>0.6 0.5</start>
+      <end>-0.6 0.5</end>
+    </line>
+    <line name="left" type="boundary">
+      <start>-0.5 0.5</start>
+      <end>-0.5 -0.5</end>
+    </line>
+    <line name="right" type="boundary">
+      <start>0.5 -0.5</start>
+      <end>0.5 0.5</end>
+    </line>
+
+    <bucket_fill name="water fluid">
+      <location value="0; 0"/>
+    </bucket_fill>
+  </setup>
+
+  <run_time value="2.0"/>
+  <time_step value="0.0001" auto_factor="0.5"/>
+
+  <export format="vtk" time_step="0.001">
+    <variable value="PRESSURES"/>
+    <variable value="VELOCITIES"/>
+    <variable value="FREE_SURFACE"/>
+    <variable value="DIV_VEL"/>
+  </export>
+
+</simulation>

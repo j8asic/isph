@@ -1,0 +1,93 @@
+Project ISPH
+============
+
+    Cross-platform CFD library for mesh-free simulation and 
+    visualization of incompressible flows using Smoothed Particle 
+    Hydrodynamics (SPH) methods.
+
+    Check out http://isph.sourceforge.net/ for more, and up to date infos.
+
+
+Project Structure
+----------------
+
+    /isph
+        /bin        compiled tools
+        /build      build and IDE project files
+        /data       test and other data
+        /doc        library (doxygen) and tools documentation
+        /isphlib    library sources
+        /lib        compiled library files
+        /tools      tools sources
+
+
+Requirements
+------------
+
+    For successful compilation you'll need the following installed on
+    your system:
+
+    - OpenCL SDK 1.0 or later
+
+    Since there is no integrated visualization engine at the moment,
+    we suggest you post-process simulated data with:
+
+    - ParaView (don't forget to enable meshless plugin)
+    - VisIt
+    - Tecplot
+    - etc.
+
+
+Supported Operating Systems
+---------------------------
+
+    - Linux 2.6
+    - Windows XP, Vista, 7
+
+    Other operating systems may work but are not tested.
+    Soon it will be tested on Mac OS X as well.
+
+
+Supported Compilers
+-------------------
+
+    - MSVC 9 and newer
+    - GCC 4.0 and newer
+
+    Other standard C++ compilers should work but are not tested.
+
+
+Compiling the project
+---------------------
+
+    - Windows
+
+        using Visual Studio 2010 open the solution that is
+        located in /build/vs2010, and build the solution
+
+    - Linux
+
+        In main project folder type:
+
+        make            to build both library and tools
+        make isphlib    to only build the library
+        make tools      to only build tools
+        make clean      to clean built stuff
+
+
+Legal Stuff
+-----------
+
+    (c) Copyright 2009-2012. The ISPH authors.
+    All rights reserved.
+
+    The project is distributed under the GNU/GPL License,
+    complete license text can be found in file named 'COPYING'.
+
+
+Contact Details
+---------------
+
+    You can send an e-mail to <isph.cfd@gmail.com>, we'd like to
+    hear from you. Also, the list of authors and their contact
+    e-mails can be found in file named 'AUTHORS'.

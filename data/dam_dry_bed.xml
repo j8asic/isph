@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<simulation>
+
+  <description>
+    Dry bed dam break.
+  </description>
+
+  <name value="dam dry"/>
+  <dimensions value="2"/>
+  <precision value="single"/>
+  <async_output enable="no"/>
+
+  <solver type="isph">
+    <projection type="non-incremental" order="1"/>
+    <ppe_solver type="bicgstab" tolerance="1e-3" max_iterations="250"/>
+    <free_surface value="1.5"/>
+    <particle_shifting enable="n" factor="0.02" frequency="1"/>
+  </solver>
+
+  <devices type="gpu" name="" count="all" />
+
+  <boundary>
+    <min>-0.5 -0.1</min>
+    <max>0.7 0.5</max>
+  </boundary>
+
+  <gravity value="0; -9.8"/>
+
+  <particle_spacing value="0.002"/>
+  <smoothing_kernel type="cubic" value="0.0028" correction="n"/>
+
+  <fluid name="water fluid" density="1000" viscosity="1e-3"/>
+
+  <setup>
+    <line name="fluid top" type="free surface">
+      <start value="-0.38; 0.15"/>
+      <end value="0; 0.15"/>
+    </line>
+    <!--
+    <line name="prijelaz" type="free surface">
+      <start value="-0.03; 0.15"/>
+      <end value="0; 0.12"/>
+    </line>
+    -->
+    <line name="fluid right" type="free surface">
+      <start value="0; 0.15"/>
+      <end value="0; 0"/>
+    </line>
+    <line name="bottom wall" type="boundary">
+      <start value="-0.38; 0"/>
+      <end value="0.66; 0"/>
+    </line>
+    <line name="left wall" type="boundary">
+      <start value="-0.38; 0.1499"/>
+      <end value="-0.38; 0"/>
+    </line>
+
+    <bucket_fill name="water fluid">
+      <location value="-0.378; 0.148"/>
+    </bucket_fill>
+  </setup>
+
+  <run_time value="0.41"/>
+  <time_step value="0.25e-3" auto_factor="0.5"/>
+
+  <export format="vtk" time_step="0.01">
+    <variable value="PRESSURES"/>
+    <variable value="VELOCITIES"/>
+    <variable value="FREE_SURFACE"/>
+    <!--<time value="0.156"/>
+    <time value="0.219"/>
+    <time value="0.281"/>
+    <time value="0.343"/>-->
+  </export>
+
+</simulation>

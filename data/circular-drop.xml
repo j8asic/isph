@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<simulation>
+
+  <name value="drop"/>
+  <dimensions value="2"/>
+  <precision value="single"/>
+  <async_output enable="no"/>
+
+  <solver type="isph">
+    <projection type="non-incremental" order="1"/>
+    <ppe_solver type="cg" tolerance="1e-5" max_iterations="200"/>
+    <free_surface_factor value="1.5"/>
+    <particle_shifting enable="no" factor="0.005" frequency="1"/>
+  </solver>
+
+  <devices type="gpu" name="" count="all" />
+
+  <boundary>
+    <min value="-1.0 -3.0"/>
+    <max value="1.0 3.0"/>
+  </boundary>
+
+  <particle_spacing value="0.02"/>
+  <smoothing_kernel type="cubic" value="0.05" correction="no"/>
+
+  <gravity>0 0</gravity>
+  <fluid name="water fluid" density="1000" viscosity="0.0"/>
+
+  <setup>
+    <circle name="drop" type="water fluid">
+      <center>0.0 0.0</center>
+      <radius value="1.0"/>
+      <filled value="yes"/>
+      <initialization>
+        <variable name="VELOCITIES">-100*x; 100*y;</variable>
+        <variable name="PRESSURES">0.5*DENSITY*100*100*(1.0 - (x*x + y*y))</variable>
+      </initialization>
+    </circle>
+  </setup>
+
+  <run_time value="0.01"/>
+  <time_step value="0.0001" auto_factor="0.4"/>
+
+  <export format="vtk" time_step="0.0001">
+    <variable>PRESSURES</variable>
+    <variable>VELOCITIES</variable>
+    <variable>FREE_SURFACE_UN</variable>
+  </export>
+
+  <export type="probes" time_step="0.0001">
+    <variable>PRESSURES</variable>
+    <location>0 0 0</location>
+    <location>0 0.5 0</location>
+    <location>0.5 0 0</location>
+  </export>
+
+</simulation>
